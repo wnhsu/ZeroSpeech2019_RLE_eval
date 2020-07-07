@@ -20,7 +20,7 @@ set -e
 
 
 if [ "$#" -ne 3 ]; then
-    echo "usage: bash evaluate_submission.sh <submission_zip> <which_embedding> <dtw_cosine|dtw_kl|levenshtein>"
+    echo "usage: bash evaluate_rle.sh <submission_zip> <which_embedding> <dtw_cosine|dtw_kl|levenshtein>"
     echo "This tool is for the english evaluation only!"
     echo "For the surprise dataset, we do not provide the evaluation task."
     echo ""
