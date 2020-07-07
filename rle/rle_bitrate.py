@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Author: Wei-Ning Hsu
+# This is adapted from $HOME/system/eval/scripts/bitrate.py in the ZS2019
+# Challenge's docker image, which computes the bit-rate for three encodings:
+# 1) lossless-RLE encoding, which treat a (code, length) tuple as a symbol, 2)
+# factorized lossless-RLE encoding, which encode code and length separately,
+# and 3) lossy-RLE encoding, which discards the length information and is the
+# bitrate corresponding to the segment ABX evaluation.
+
 
 from __future__ import print_function, division
 
@@ -29,7 +38,7 @@ def entropy_symbols(nbr_lines, d_symbol2occ):
             ent_s += -(p_s* math.log(p_s, 2))
     return ent_s
 
-def bitrate(sym,  nbr_lines, total_duration):
+def bitrate(sym, nbr_lines, total_duration):
     """Calculate bitrate
     
     Argument(s);
@@ -101,7 +110,7 @@ if __name__ == "__main__":
         print("Read " + str(len(length_counts)) + " distinct lengths")
         print("Total number of lines: " + str(n_lines))
         print("Total duration: " + str(total_duration))
-        print("Estimated Factored-RLE bitrate (bits/s): " +
+        print("Estimated factored-RLE bitrate (bits/s): " +
               str(bitrate_factor(symbol_counts, length_counts, n_lines, total_duration)))
         print("Estimated segment bitrate (bits/s): " +
               str(bitrate(symbol_counts, n_lines, total_duration)))

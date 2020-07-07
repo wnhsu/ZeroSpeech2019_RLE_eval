@@ -1,3 +1,11 @@
+# Author: Wei-Ning Hsu
+# 
+# This is adapted from `$HOME/miniconda3/envs/eval/lib/python2.7/site-packages/read_zrsc2019/read.py`
+# in the ZS2019 Challenge's docker image, which implements an iterator that 
+# returns segments (list of (code, length) tuples) instead of frames (list of 
+# codes). This is used for computing RLE bit-rates.
+
+
 from __future__ import print_function, division
 from collections import defaultdict
 import sys
@@ -49,7 +57,6 @@ def read(file):
                         ": Inconsistent format, vector size changed")
                 try:
                     value_s = tuple(to_float(line_elts))
-                    # yield value_s
                 except ValueError as e:
                     raise ReadZrsc2019Exception("Error coverting to float: " + str(e))
 

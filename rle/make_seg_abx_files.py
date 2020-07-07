@@ -1,3 +1,10 @@
+# Author: Wei-Ning Hsu
+# 
+# This is adapted from $HOME/system/eval/scripts/make_abx_files.py in the 
+# ZS2019 Challenge's docker image, which omits consecutive codes that are
+# the same as the previous codes and is used to compute segment ABX score.
+
+
 from __future__ import division
 
 import glob
@@ -8,17 +15,20 @@ from sklearn import preprocessing
 # Takes embeddings from submission (arbitrary times):
 # in : 
 #   0107_400123_0000.txt : (one_hot_vector)
-#       possibletime1 0 0 0 1 0 0 0 
-#       possibletime2 0 0 0 0 0 1
-#       possibletime3 1 0 0 0 0 0
+#       0 0 0 1 0 0
+#       0 0 0 0 0 1
+#       0 0 0 0 0 1
+#       1 0 0 0 0 0
+#       1 0 0 0 0 0
 # out : a numpy file with two keys. "features" contains a 2-D matrix with 
 #       feature along the column and times along the axis. 
 #       "time" contains the middle time for each phoneme
 #          
 #       0107_400123_0000.npz :
-#       features:[[possibletime1 0 0 0 1 0 0 0],
-#             [possibletime20 0 0 0 0 0 1],
-#             [possibletime3 1 0 0 0 0 0]])  
+#       features:[
+#             [0 0 0 1 0 0],
+#             [0 0 0 0 0 1],
+#             [1 0 0 0 0 0]])  
 #       time:[0,0.5,1]
 
 
